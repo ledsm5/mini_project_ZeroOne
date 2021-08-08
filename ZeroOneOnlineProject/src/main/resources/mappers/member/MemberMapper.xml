@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.memberMapper">
+<sql id="baseColumn">
+	 MEM_ID memId, MEM_PW memPw, MEM_ADDRESS memAddress,MEM_NAME memName,
+			MEM_PHONE memPhone, MEM_BIRTH memBirth, MEM_GENDER memGender, MEM_EMAIL memEmail, 
+			POST_NUMBER postNumber, DETAIL_ADD detailAdd, MEM_EMAIL_CK memEmailCk
+</sql>
+
+
+<insert id="memJoin" parameterType="Model.MemberDTO">
+	insert into member
+		(MEM_ID, MEM_PW, MEM_ADDRESS,MEM_NAME, MEM_PHONE , MEM_BIRTH, MEM_GENDER , MEM_EMAIL, 
+			POST_NUMBER , DETAIL_ADD , MEM_EMAIL_CK )
+	values(#{memId},#{memPw},#{memAddress},#{memName},#{memPhone},#{memBirth},#{memGender},#{memEmail},#{postNumber},#{detailAdd},#{memEmailCk})
+</insert>
+
+<delete id="memDel" parameterType="string">
+	delete from member
+	where mem_id = #{memId}
+</delete>
+
+<update id="memMod" parameterType="Model.MemberDTO">
+	update member
+	set detail_add =#{detailAdd}, mem_address = #{memAddress}, mem_email = #{memEmail}, MEM_EMAIL_CK=#{memEmailCk},
+	MEM_PHONE=#{memPhone}, POST_NUMBER =#{postNumber}
+	where mem_id =#{memId}
+</update>
+
+<select id="memDetail" parameterType="string" resultType="Model.MemberDTO">
+	select <include refid="baseColumn"></include> from member
+	where mem_id = #{memId}
+</select>
+
+<select id="memList" resultType="Model.MemberDTO" parameterType="string">
+	select MEM_ID memId, MEM_PW memPw, MEM_ADDRESS memAddress,MEM_NAME memName,
+			MEM_PHONE memPhone, MEM_BIRTH memBirth, MEM_GENDER memGender, MEM_EMAIL memEmail, 
+			POST_NUMBER postNumber, DETAIL_ADD detailAdd, MEM_EMAIL_CK memEmailCk
+	from member
+	<if test="value != null">
+		where mem_id=#{memId}
+	</if>
+</select>
+</mapper>

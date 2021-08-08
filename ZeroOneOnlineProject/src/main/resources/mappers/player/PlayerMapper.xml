@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.playerMapper">
+
+<sql id="BaseColumn">
+	PLER_NUM plerNum,PLER_NAME plerName,PLER_TEAM plerTeam,PLER_AGE plerAge,PLER_FOOT plerFoot,PLER_RATE plerRate,PLER_PRICE plerPrice,
+	 PLER_DETAIL plerDetail,PLER_LEAGUE plerLeague ,PLER_ABILITY plerAbility,PLER_POSITION plerPosition ,PLER_SALARY plerSalary,
+	 pler_height plerHeight,pler_indi_skill plerIndiSkill,pler_session plerSession ,PLER_IMAGE plerImage
+ </sql>
+
+
+
+
+
+<select id="plerDetail" parameterType="string" resultType="Model.PlayerDTO">
+	select <include refid="BaseColumn"></include> from player
+	where pler_num = #{plerNum}
+</select>
+
+<delete id="plDel" parameterType="string">
+	delete from player
+	where pler_num = #{plerNum}
+</delete>
+
+
+<select id="listPrint" resultType="Model.PlayerDTO">
+	select <include refid="BaseColumn"></include> from player
+</select>
+
+<insert id="playerRegist" parameterType="Model.PlayerDTO">
+	insert into player (PLER_NUM,PLER_NAME,PLER_TEAM,PLER_AGE,PLER_FOOT,PLER_RATE,PLER_PRICE,
+	 					PLER_DETAIL ,PLER_LEAGUE ,PLER_ABILITY,PLER_POSITION ,PLER_SALARY,pler_height,pler_indi_skill,pler_session, PLER_IMAGE)
+	values(#{plerNum},#{plerName},#{plerTeam},#{plerAge},#{plerFoot},#{plerRate},#{plerPrice},#{plerDetail},
+			#{plerLeague},#{plerAbility},#{plerPosition},#{plerSalary},#{plerHeight},#{plerIndiSkill},#{plerSession},#{plerImage})
+</insert>
+
+<select id="playerNum" resultType="string">
+	select pler_seq.nextval from dual
+	<!--create SEQUENCE pler_seq
+			start with 1;  -->
+</select>
+
+</mapper>

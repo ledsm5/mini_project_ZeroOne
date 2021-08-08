@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.formationMapper">
+
+<sql id="BaseColumn">
+	PLER_NUM plerNum,PLER_NAME plerName,PLER_TEAM plerTeam,PLER_AGE plerAge,PLER_FOOT plerFoot,PLER_RATE plerRate,PLER_PRICE plerPrice,
+	 PLER_DETAIL plerDetail,PLER_LEAGUE plerLeague ,PLER_ABILITY plerAbility,PLER_POSITION plerPosition ,PLER_SALARY plerSalary,
+	 pler_height plerHeight,pler_indi_skill plerIndiSkill,pler_session plerSession ,PLER_IMAGE plerImage
+ </sql>
+
+<sql id="BaseSquad">
+	mem_id memId, pler_name plerName, pler_salary plerSalary,pler_price plerPrice,pler_position plerPosition,pler_ability plerAbility
+</sql>
+
+
+
+
+
+
+
+<select id="forList" parameterType="string" resultType="Model.FormationDTO">
+	select mem_id memId, pler_name plerName, pler_salary plerSalary,pler_price plerPrice,pler_position plerPosition,
+		pler_ability plerAbility,pler_image plerImage ,POSITION_NUM positionNum 
+	from formation
+	where mem_id = #{memId}
+</select>
+
+
+
+
+<!-- 
+<insert id="wishAdd" parameterType="Model.WishDTO" useGeneratedKeys="false"> 인서트 로 merge쓸때 에러 나는거방지  머지쓸때 insert해도되고 update해도된다
+	MERGE into wish w
+	using (select prod_num from products where prod_num = #{prodNum}) p
+	on (w.prod_num = p.prod_num and w.mem_id = #{memId})
+	When matched then ck쓰는이유: 오라클에서 머지쓸때 delete 만 사용이 안된다 그래서 아무거나 만들어서 update 앞에해주는거 
+		update set w.ck = 1111
+		delete where (w.prod_num = #{prodNum} and w.mem_id = #{memId})
+	When not Matched then 
+		insert (w.prod_num, w.mem_id)
+		values(#{prodNum},#{memId})
+	
+</insert>  머지로 바꿔야 하지않을까 싶은데 ..-->
+
+
+<insert id="forRegist" parameterType="Model.FormationDTO">
+	insert into formation
+		(mem_id, pler_name, pler_salary,pler_position,pler_ability , POSITION_NUM,pler_price,pler_image)
+	values(#{memId},#{plerName},#{plerSalary},#{plerPosition},#{plerAbility},#{positionNum},
+		((select pler_price from player where pler_name = #{plerName})),
+		((select pler_image from player where pler_name = #{plerName} ))
+	
+	)
+</insert>
+
+
+
+<select id="squadDetail" parameterType="string" resultType="Model.SquadDTO">
+	
+	select <include refid="BaseSquad"></include> from squad
+	where pler_name = #{plerName}
+</select>
+
+
+<delete id="squadDel" parameterType="string">
+	delete from squad
+	where pler_name=#{plerName}
+	
+</delete>
+
+<select id="squadList" resultType="Model.SquadDTO" parameterType="string">
+	select <include refid="BaseSquad"></include>
+	from squad
+	where mem_id = #{memId}
+</select>
+
+
+<insert id="addPlSquad" parameterType="Model.SquadDTO">
+	insert into squad 
+			(mem_id, pler_name, pler_salary,pler_price,pler_position,pler_ability)
+	values(#{memId},#{plerName},#{plerSalary},#{plerPrice},#{plerPosition},#{plerAbility})
+	
+</insert>
+
+
+
+<select id="searchDetail" parameterType="string" resultType="Model.PlayerDTO">
+	select <include refid="BaseColumn"></include> from player
+	where pler_name = #{plerName}
+</select>
+
+
+</mapper>

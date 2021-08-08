@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			"
+>
+	<bean class="controller.formation.FormationController"></bean>
+	<bean class="repository.FormationRepository"></bean>
+	<bean class="repository.FormationPlayerRepository"></bean>
+	
+	<bean class="service.formation.FmPlayerDetailService"></bean>
+	<bean class="service.formation.AddPlayerSquad"></bean>
+	<bean class="service.formation.SquadListService"></bean>
+	<bean class="service.formation.SquadDelService"></bean>
+	<bean class="service.formation.SquadDetailService"></bean>
+	<bean class="service.formation.FormationRegistService"></bean>
+	<bean class="service.formation.FormationListService"></bean>
+	
+</beans>
