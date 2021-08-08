@@ -79,24 +79,16 @@
 			<div id="team_fm">
 				포메이션 <br>
 				<div class="buttonSelector">
-				
 							
-					
-					
-					<c:forEach items="${listFor }" var="name">
-												
-							<input type="image"  src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" onclick="sel()"><br>		
-							<input type="hidden" value="${name.positionNum }" class="${name.positionNum }">javascript:location.href='../memDel?memId=${lists[0].memId}'
+					<c:forEach items="${listFor }" var="name"><%-- javascript:location.href='../memDel?memId=${lists[0].memId}' --%>												
+							<input type="image"  src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" onclick="sel('${name.positionNum }')"><br>		
+							<input type="hidden" value="${name.positionNum }" class="${name.positionNum }">
 					</c:forEach>				
 					
 							<c:forEach var="i" begin="1" end="11">				
 								<input type="button" class="positionNum${i }" id="positionNum${i }" name="positionNum${i }" value="선수${i }" onclick="run(${i })"><br>
 							</c:forEach>
-						
-							
-				
-					
-						
+								
 				</div>
 			</div>
 		</div> 
@@ -175,25 +167,24 @@ const selector11 = document.getElementById(fmId11);
 
 
 
-bbb();
+	bbb();
 
-	function bbb() {
-		
+	function bbb() {		
 		for(let i=1; i<12; i++) {
 			if(eval('selector'+i) != null){
 		    	eval('selector'+i).style.visibility='hidden';	 
-		    	console.log('eval("selector"+i)');
+		    	
 			}
 		}
 	}
 
 
-
+	//버튼생성 
 	function run(array) {
-		frmJoin.positionNum.value="positionNum"+array;
-		
+		frmJoin.positionNum.value="positionNum"+array;		
 	}
-	
+
+	//hidden에 값넣고 전송 
 	function aaa(event) {
 		frmJoin.plerName.value = event[0];
 		frmJoin.plerPosition.value = event[1];
@@ -205,8 +196,18 @@ bbb();
 	}
 	
 	
-	
+	function sel(aaa){
+		const returnCon = confirm("방출 하시겠습니까?");
+		
+		if(returnCon){
+		console.log(aaa);
+			location.href = 'forDel?positionNum=' +aaa;
+			
+		}
+	}
     
+	
+	
 	   
         
         

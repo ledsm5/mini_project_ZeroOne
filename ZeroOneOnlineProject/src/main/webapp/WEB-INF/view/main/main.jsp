@@ -47,21 +47,20 @@ body, html {height: 100%}
 
 
 <!-- Contact Modal -->
-<div id="contact" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom">
+<div id="contact" class="w3-modal"  >
+  <div class="w3-modal-content w3-animate-zoom" style="width:400px;">
     <div class="w3-container w3-black">
       <span onclick="document.getElementById('contact').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
       <h1>로그인</h1>
     </div>
-    <div class="w3-container">
+    <div class="w3-container" style="width: 360px; height: 260px; ">
       <p>회원 정보를 입력해주세요 </p>
 		<form:form action="login" method ="post" name="frm" modelAttribute="loginCommand">
-			<table border="1">
+			<table border="1" >
 				<tr>
 					<td colspan="3">
-					아이디저장 <input type="checkbox" name="idStore" <c:if test="${!empty isId }">checked</c:if>>|
-						자동로그인<input type="checkbox" name="autoLogin"> 
-						
+						아이디저장 <input type="checkbox" name="idStore" <c:if test="${!empty isId }">checked</c:if>>|
+						자동로그인<input type="checkbox" name="autoLogin"> 						
 					</td>
 				</tr>
 				<tr>

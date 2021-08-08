@@ -18,6 +18,14 @@ public class FormationRepository {
 
 	
 	
+	
+	
+	public void forDel(FormationDTO dto) {
+		statement = namespace + ".forDel";
+		int i = sqlSession.delete(statement, dto);
+		System.out.println(i + "개가 삭제되었습니다 ");
+	}
+	
 	public List<FormationDTO> forList(String memId) {
 		statement = namespace + ".forList";
 		return sqlSession.selectList(statement, memId);

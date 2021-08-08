@@ -16,7 +16,10 @@
 
 
 
-
+<delete id="forDel" parameterType="Model.FormationDTO">
+	delete from formation 
+	where mem_id = #{memId} and position_num = #{positionNum}
+</delete>
 
 
 <select id="forList" parameterType="string" resultType="Model.FormationDTO">

@@ -12,7 +12,7 @@ import Model.SquadDTO;
 import command.FormationCommand;
 import service.formation.AddPlayerSquad;
 import service.formation.FmPlayerDetailService;
-
+import service.formation.FormationDelService;
 import service.formation.FormationListService;
 import service.formation.FormationRegistService;
 import service.formation.SquadDelService;
@@ -37,10 +37,16 @@ public class FormationController {
 	FormationRegistService formationRegistService;
 	@Autowired
 	FormationListService formationListService;
+	@Autowired
+	FormationDelService formationDelService;
 	
 	
 	
-	
+	@RequestMapping("forDel")
+	public String formationDelete(@RequestParam(value="positionNum")String positionNum,HttpSession session) {
+		formationDelService.forDel(positionNum,session);
+		return "redirect:formation";
+	}
 	
 	
 	

@@ -17,5 +17,6 @@
 	<bean class="service.formation.SquadDetailService"></bean>
 	<bean class="service.formation.FormationRegistService"></bean>
 	<bean class="service.formation.FormationListService"></bean>
+	<bean class="service.formation.FormationDelService"></bean>
 	
 </beans>
