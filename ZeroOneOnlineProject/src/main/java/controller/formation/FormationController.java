@@ -8,11 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import Model.FormationDTO;
 import Model.SquadDTO;
 import command.FormationCommand;
 import service.formation.AddPlayerSquad;
 import service.formation.FmPlayerDetailService;
 import service.formation.FormationDelService;
+import service.formation.FormationDetailService;
 import service.formation.FormationListService;
 import service.formation.FormationRegistService;
 import service.formation.SquadDelService;
@@ -39,8 +41,16 @@ public class FormationController {
 	FormationListService formationListService;
 	@Autowired
 	FormationDelService formationDelService;
+	@Autowired
+	FormationDetailService formationDetailService;
 	
 	
+	
+	@RequestMapping("forDetail")
+	public String forDetail(String plerPosition , HttpSession session, Model model) {
+		formationDetailService.forDetail(plerPosition ,session,model);
+		return "redirect:formation";
+	}
 	
 	@RequestMapping("forDel")
 	public String formationDelete(@RequestParam(value="positionNum")String positionNum,HttpSession session) {
@@ -52,9 +62,10 @@ public class FormationController {
 	
 	//ajax 로 포메이션 여러개 불러오기 
 	@RequestMapping("formationRegist")//드래그 해서 놓으면 해당 자리의 update 문으로  TEAM_Location_num을 지정해준다 
-	public String formationRegist(FormationCommand formationCommand, HttpSession session, Model model) {		
-		squadListService.squadList(session,model);
+	public String formationRegist(FormationCommand formationCommand,  HttpSession session, Model model) {		
+		squadListService.squadList(session,model);		
 		formationRegistService.formationRegist(formationCommand,session);
+		squadDelService.delAction(formationCommand);
 		return "redirect:formation";
 	}
 	
@@ -70,8 +81,8 @@ public class FormationController {
 	
 	
 	@RequestMapping("squadDel")
-	public String squadDel(@RequestParam(value="plerName")String plerName) {
-		squadDelService.delAction(plerName);
+	public String squadDel(FormationCommand formationCommand) {
+		squadDelService.delAction(formationCommand);
 		return "redirect:formation";
 	}
 	
@@ -91,6 +102,12 @@ public class FormationController {
 		}//순서 바뀌면 에러
 		
 		SquadDTO dto1 = squadDetailService.sqdDetail(plerName);
+		FormationDTO dto2 = formationDetailService.forDetail(plerPosition ,session,model); 
+		if(dto2.getPlerName() == plerName) {
+			model.addAttribute("alreadyErr","이미 구매한 선수입니다");
+			return "formation/formationHome";
+		}
+		
 		if (dto1 == null) {
 			addPlayerSquad.addPlSquad(plerName,plerSalary,plerPrice,plerPosition,plerAbility,session);
 			formationListService.forList(session,model);

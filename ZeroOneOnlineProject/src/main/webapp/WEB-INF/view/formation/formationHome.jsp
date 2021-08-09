@@ -22,7 +22,7 @@
     	clear: both;
    	 	content: "";
     	float: left;
-    	width: 50%;
+    	width: 60%;
     	box-sizing: border-box;
 	}
 	#search_bar{
@@ -31,18 +31,19 @@
     	
 	}
 	#team_fm{
-		height: 500px;
+		height: 800px;
    	 	background-color: red;
     	float: left;
    	 	width: 100%;
 	}
 	#squad_list{
-		width: 50%;
+		width: 40%;
   	  	float: right;
-   	 	height: 700px;
+   	 	height: 1000px;
     	background-color: yellow;
     	border-left: 3px solid #c32222;
     	box-sizing: border-box;
+    
 
 	}
 	
@@ -50,6 +51,19 @@
 		width: 50px;
 		height: 50px;
 	}
+	
+	.list_tb {
+		margin-top: 30px;
+		margin-left: 20px;
+	}
+	
+/* 	.btnMaker {
+		visibility: hidden;
+	}
+	
+	.btnMaker:hover {
+		visibility:visible;
+	} */
 	
 </style>
 <script type="text/javascript">
@@ -65,65 +79,100 @@
 					<input type="submit" value="검색">
 				
 				</form>
+				
 				<form action="addPlayer">
-					${dto.plerName } ${err }
+					${dto.plerName } ${err } ${alreadyErr }
 					<input type="submit" value="내 팀에 틍록">
 					<input type="hidden" name="plerName" value="${dto.plerName }">
 					<input type="hidden" name="plerPosition" value="${dto.plerPosition }">
 					<input type="hidden" name="plerAbility" value="${dto.plerAbility }">
 					<input type="hidden" name="plerSalary" value="${dto.plerSalary }">
 					<input type="hidden" name="plerPrice" value="${dto.plerPrice }">
-					
 				</form>
 			</div>
 			<div id="team_fm">
 				포메이션 <br>
 				<div class="buttonSelector">
+					<c:forEach items="${listFor }" var="name">
+					<table>		
+						<tr>
+							<td class="btnMaker">			<%-- javascript:location.href='forDetail?positionNum=${name.positionNum }' --%>										
+								<input type="image"  src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" ><br>
+								<form action="forDetail?positionNum=${name.positionNum }">
+									<button onclick="ViewSearch()" >선수정보</button>
+								</form>								
+								<button onclick="sel('${name.positionNum }')">방출</button>								
+							</td>
+							<td>		
+								<input type="hidden" value="${name.positionNum }" class="${name.positionNum }">
+							</td>
+						<tr>	
+					</table>
+					<div id="${name.positionNum }hhh" style="position:absolute;z-index:999;display:none; width:100%; height:90%;
+							background: none rgba(0, 0, 0, 0.9); filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#80000000', endColorstr='#80000000');" align='center'>
+						<table valign="middle" height=100%><tr><td >
+							<font size='3' color='white' onclick='CloseSearch()'>x</font>
+							${forD.plerName }
 							
-					<c:forEach items="${listFor }" var="name"><%-- javascript:location.href='../memDel?memId=${lists[0].memId}' --%>												
-							<input type="image"  src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" onclick="sel('${name.positionNum }')"><br>		
-							<input type="hidden" value="${name.positionNum }" class="${name.positionNum }">
+							<br><br>
+							</td></tr>
+						</table>
+					</div>	
 					</c:forEach>				
-					
 							<c:forEach var="i" begin="1" end="11">				
 								<input type="button" class="positionNum${i }" id="positionNum${i }" name="positionNum${i }" value="선수${i }" onclick="run(${i })"><br>
 							</c:forEach>
 								
 				</div>
+				
 			</div>
 		</div> 
-	
+
 			<div id="squad_list">
-				<h2>선수단</h2>
-				<form:form action="formationRegist" name="frmJoin" method="get" modelAttribute="formationCommand">	
-					<input type="hidden" name="plerName" >
-					<input type="hidden" name="plerPosition" >
-					<input type="hidden" name="plerAbility" >
-					<input type="hidden" name="plerSalary" >
-					<input type="hidden" name="positionNum" >	
-				</form:form>
-				<table border="1">					
-						<tr><td>선수이름</td><td>포지션</td><td>스탯</td><td>주급</td><td></td><td></td></tr>
-						<c:forEach items="${list }" var="list" varStatus="cnt">
-							<tr>
-								<td>${list.plerName }</td>
-								<td>${list.plerPosition }</td>
-								<td>${list.plerAbility }</td>
-								<td>${list.plerSalary }</td>
-								<td><a href="squadDel?plerName=${list.plerName }">방출하기</a></td>
-								<td><input type="button" value="등록" onclick="aaa(['${list.plerName }','${list.plerPosition }','${list.plerAbility }','${list.plerSalary }'])"></td>
-							</tr>
-						</c:forEach>		
-					<%-- <c:if test="${list.memId == null }">
-						선수단이 없습니다 
-					</c:if> --%>
-					</table>						
+				<div class="list_tb">
+					<h2>선수단</h2>
+					<form:form action="formationRegist" name="frmJoin" method="get" modelAttribute="formationCommand">	
+						<input type="hidden" name="plerName" >
+						<input type="hidden" name="plerPosition" >
+						<input type="hidden" name="plerAbility" >
+						<input type="hidden" name="plerSalary" >
+						<input type="hidden" name="positionNum" >	
+						
+					</form:form>
+					<table border="1">					
+							<tr><td>선수이름</td><td>포지션</td><td>스탯</td><td>주급</td><td></td><td></td></tr>
+							<c:forEach items="${list }" var="list" varStatus="cnt">
+								<tr>
+									<td>${list.plerName }</td>
+									<td>${list.plerPosition }</td>
+									<td>${list.plerAbility }</td>
+									<td>${list.plerSalary }</td>
+									<td><a href="squadDel?plerName=${list.plerName }">방출하기</a></td>
+									<td><input type="button" value="등록" onclick="aaa(['${list.plerName }','${list.plerPosition }','${list.plerAbility }','${list.plerSalary }'])"></td>
+								</tr>
+							</c:forEach>		
+						<%-- <c:if test="${list.memId == null }">
+							선수단이 없습니다 
+						</c:if> --%>
+					</table>	
+				</div>				
 			</div>
 	</div>
 
 <script type="text/javascript">
 
 
+    function ViewSearch(){
+        document.getElementById("positionNum2hhh").style.display='inline'
+    }
+function CloseSearch(){
+        document.getElementById("positionNum2hhh").style.display='none'
+    }
+
+/* 
+	function pop() {
+    	window.open("https://blog.naver.com/hyoyeol/70184157539","naver","width =600, height = 600")
+    } */
 
 const fmNum1 = document.querySelector('.positionNum1');
 const fmNum2 = document.querySelector('.positionNum2');
@@ -168,7 +217,7 @@ const selector11 = document.getElementById(fmId11);
 
 
 	bbb();
-
+	//데이터 있는 포지션 hidden 만들기
 	function bbb() {		
 		for(let i=1; i<12; i++) {
 			if(eval('selector'+i) != null){
@@ -197,6 +246,7 @@ const selector11 = document.getElementById(fmId11);
 	
 	
 	function sel(aaa){
+		
 		const returnCon = confirm("방출 하시겠습니까?");
 		
 		if(returnCon){
@@ -238,6 +288,7 @@ function regist() {
     });
 } 
  */
+ 
 </script>
 
 </body>

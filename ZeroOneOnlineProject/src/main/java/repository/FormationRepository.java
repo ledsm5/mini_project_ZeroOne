@@ -17,7 +17,10 @@ public class FormationRepository {
 	String statement;
 
 	
-	
+	public FormationDTO forDetail(FormationDTO dto) {
+		statement = namespace + ".forDetail";
+		return sqlSession.selectOne(statement, dto);
+	}
 	
 	
 	public void forDel(FormationDTO dto) {

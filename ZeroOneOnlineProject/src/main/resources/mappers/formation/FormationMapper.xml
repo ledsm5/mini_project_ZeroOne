@@ -16,6 +16,13 @@
 
 
 
+<select id="forDetail" parameterType="Model.FormationDTO" resultType="Model.FormationDTO">
+	select pler_name plerName 
+	from formation
+	where mem_id = #{memId} and position_num = #{positionNum}
+</select>
+
+
 <delete id="forDel" parameterType="Model.FormationDTO">
 	delete from formation 
 	where mem_id = #{memId} and position_num = #{positionNum}
