@@ -98,27 +98,33 @@
 						<tr>
 							<td class="btnMaker">			<%-- javascript:location.href='forDetail?positionNum=${name.positionNum }' --%>										
 								<input type="image"  src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" ><br>
-								<form action="forDetail?positionNum=${name.positionNum }">
-									<button onclick="ViewSearch()" >선수정보</button>
-								</form>								
-								<button onclick="sel('${name.positionNum }')">방출</button>								
+														
+									<button onclick="ViewSearch('${name.positionNum }')" >선수정보</button>							
+									<button onclick="sel('${name.positionNum }')">방출</button>
+															
 							</td>
 							<td>		
 								<input type="hidden" value="${name.positionNum }" class="${name.positionNum }">
 							</td>
 						<tr>	
 					</table>
+					<!-- 선수 상세 정보   -->
 					<div id="${name.positionNum }hhh" style="position:absolute;z-index:999;display:none; width:100%; height:90%;
 							background: none rgba(0, 0, 0, 0.9); filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#80000000', endColorstr='#80000000');" align='center'>
-						<table valign="middle" height=100%><tr><td >
 							<font size='3' color='white' onclick='CloseSearch()'>x</font>
-							${forD.plerName }
-							
-							<br><br>
-							</td></tr>
+						<table valign="middle" height=100%>
+							<tr>
+								<td >
+															
+									<br><br>
+								</td>
+								<td>${forD.plerName }	</td>
+							</tr>
 						</table>
-					</div>	
-					</c:forEach>				
+					</div>
+						
+					</c:forEach>
+							
 							<c:forEach var="i" begin="1" end="11">				
 								<input type="button" class="positionNum${i }" id="positionNum${i }" name="positionNum${i }" value="선수${i }" onclick="run(${i })"><br>
 							</c:forEach>
@@ -162,13 +168,16 @@
 <script type="text/javascript">
 
 
-    function ViewSearch(){
-        document.getElementById("positionNum2hhh").style.display='inline'
+    function ViewSearch(event){
+        document.getElementById("positionNum2hhh").style.display='inline';
+        location.href = 'forDetail?positionNum='+ event;
+        ViewSearch(event);
     }
-function CloseSearch(){
+	function CloseSearch(){
         document.getElementById("positionNum2hhh").style.display='none'
     }
 
+	
 /* 
 	function pop() {
     	window.open("https://blog.naver.com/hyoyeol/70184157539","naver","width =600, height = 600")

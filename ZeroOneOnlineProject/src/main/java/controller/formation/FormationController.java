@@ -47,9 +47,10 @@ public class FormationController {
 	
 	
 	@RequestMapping("forDetail")
-	public String forDetail(String plerPosition , HttpSession session, Model model) {
-		formationDetailService.forDetail(plerPosition ,session,model);
-		return "redirect:formation";
+	public String forDetail(String positionNum , HttpSession session, Model model) {
+		formationDetailService.forDetail(positionNum ,session,model);
+		formationListService.forList(session,model);
+		return "formation/formationHome";
 	}
 	
 	@RequestMapping("forDel")
@@ -57,8 +58,6 @@ public class FormationController {
 		formationDelService.forDel(positionNum,session);
 		return "redirect:formation";
 	}
-	
-	
 	
 	//ajax 로 포메이션 여러개 불러오기 
 	@RequestMapping("formationRegist")//드래그 해서 놓으면 해당 자리의 update 문으로  TEAM_Location_num을 지정해준다 
@@ -135,6 +134,7 @@ public class FormationController {
 	public String formation(FormationCommand formationCommand , HttpSession session,Model model) {
 		squadListService.squadList(session,model); 
 		formationListService.forList(session,model);
+		
 		
 		return "formation/formationHome";
 	}

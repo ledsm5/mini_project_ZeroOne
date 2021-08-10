@@ -12,15 +12,16 @@ import repository.FormationRepository;
 public class FormationDetailService {
 	@Autowired
 	FormationRepository formationRepository;
-	public FormationDTO forDetail(String plerPosition ,HttpSession session ,Model model) {
+	public FormationDTO forDetail(String positionNum ,HttpSession session ,Model model) {
 		
 		FormationDTO dto = new FormationDTO();
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo"); 
 		String memId = authInfo.getUserId();
 		dto.setMemId(memId);
-		dto.setPlerPosition(plerPosition);
+		dto.setPositionNum(positionNum);
 		FormationDTO dto2 = formationRepository.forDetail(dto);
-		model.addAttribute("forD" , dto2);
+		System.out.println(dto2.getPlerName());
+		model.addAttribute("forD",dto2);
 		return dto;
 	}
 }
