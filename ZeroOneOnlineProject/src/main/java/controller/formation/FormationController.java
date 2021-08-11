@@ -47,9 +47,10 @@ public class FormationController {
 	
 	
 	@RequestMapping("forDetail")
-	public String forDetail(String positionNum , HttpSession session, Model model) {
-		formationDetailService.forDetail(positionNum ,session,model);
+	public String forDetail(String plerName , HttpSession session, Model model) {
+		
 		formationListService.forList(session,model);
+		squadListService.squadList(session,model);	
 		return "formation/formationHome";
 	}
 	
@@ -101,9 +102,12 @@ public class FormationController {
 		}//순서 바뀌면 에러
 		
 		SquadDTO dto1 = squadDetailService.sqdDetail(plerName);
-		FormationDTO dto2 = formationDetailService.forDetail(plerPosition ,session,model); 
-		if(dto2.getPlerName() == plerName) {
+		FormationDTO dto2 = formationDetailService.forDetail(plerPosition, session); 
+	
+		if(dto2 != null) {
 			model.addAttribute("alreadyErr","이미 구매한 선수입니다");
+			squadListService.squadList(session,model);
+			formationListService.forList(session,model);
 			return "formation/formationHome";
 		}
 		
@@ -111,7 +115,7 @@ public class FormationController {
 			addPlayerSquad.addPlSquad(plerName,plerSalary,plerPrice,plerPosition,plerAbility,session);
 			formationListService.forList(session,model);
 			return "redirect:formation";
-		}else {
+		} else {
 			model.addAttribute("err", "중복값입니다");
 			squadListService.squadList(session,model);
 			formationListService.forList(session,model);

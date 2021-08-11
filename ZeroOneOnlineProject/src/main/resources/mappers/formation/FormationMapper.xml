@@ -17,9 +17,9 @@
 
 
 <select id="forDetail" parameterType="Model.FormationDTO" resultType="Model.FormationDTO">
-	select pler_name plerName 
+	select  pler_name plerName
 	from formation
-	where mem_id = #{memId} and position_num = #{positionNum}
+	where mem_id = #{memId} and pler_position = #{plerPosition}
 </select>
 
 

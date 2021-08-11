@@ -99,7 +99,7 @@
 							<td class="btnMaker">			<%-- javascript:location.href='forDetail?positionNum=${name.positionNum }' --%>										
 								<input type="image"  src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" ><br>
 														
-									<button onclick="ViewSearch('${name.positionNum }')" >선수정보</button>							
+									<button onclick="ViewSearch('${name.plerName }')" >선수정보</button>							
 									<button onclick="sel('${name.positionNum }')">방출</button>
 															
 							</td>
@@ -109,20 +109,26 @@
 						<tr>	
 					</table>
 					<!-- 선수 상세 정보   -->
-					<div id="${name.positionNum }hhh" style="position:absolute;z-index:999;display:none; width:100%; height:90%;
+					<div id="${name.positionNum }DT" style="position:absolute;z-index:999;display:none; width:100%; height:90%;
 							background: none rgba(0, 0, 0, 0.9); filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#80000000', endColorstr='#80000000');" align='center'>
 							<font size='3' color='white' onclick='CloseSearch()'>x</font>
 						<table valign="middle" height=100%>
-							<tr>
-								<td >
-															
-									<br><br>
-								</td>
-								<td>${forD.plerName }	</td>
-							</tr>
+							
+								<tr><td>선수명    ${forD.plerName }	</td></tr>
+								<tr><td>시즌       ${forD.plerSession }	</td></tr>
+								<tr><td>포지션    ${forD.plerPosition }	</td></tr>
+								<tr><td>능력치    ${forD.plerAbility }	</td></tr>
+								<tr><td>급여       ${forD.plerSalary }	</td></tr>
+								<tr><td>키          ${forD.plerHeight }	</td></tr>
+								<tr><td>소속리그  ${forD.plerLeague }	</td></tr>
+								<tr><td>소속팀     ${forD.plerTeam }	</td></tr>
+								<tr><td>나이        ${forD.plerAge }	</td></tr>
+								<tr><td>주발  		${forD.plerFoot }	</td></tr>
+								<tr><td>평점 		${forD.plerRate }	</td></tr>
+								<tr><td>개인기  	${forD.plerIndiSkill }	</td></tr>
+								<tr><td>시세  		${forD.plerPrice }	</td></tr>
 						</table>
-					</div>
-						
+					</div>		
 					</c:forEach>
 							
 							<c:forEach var="i" begin="1" end="11">				
@@ -169,12 +175,12 @@
 
 
     function ViewSearch(event){
-        document.getElementById("positionNum2hhh").style.display='inline';
-        location.href = 'forDetail?positionNum='+ event;
+        document.getElementById("positionNum2DT").style.display='inline';
+        location.href = 'forDetail?plerName='+ event;
         ViewSearch(event);
     }
 	function CloseSearch(){
-        document.getElementById("positionNum2hhh").style.display='none'
+        document.getElementById("positionNum2DT").style.display='none'
     }
 
 	
