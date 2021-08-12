@@ -9,8 +9,15 @@ public class FormationDTO {
 	String plerAbility;
 	String positionNum;
 	String plerImage;
+	String forABC;
 	
 	
+	public String getForABC() {
+		return forABC;
+	}
+	public void setForABC(String forABC) {
+		this.forABC = forABC;
+	}
 	public String getPlerImage() {
 		return plerImage;
 	}

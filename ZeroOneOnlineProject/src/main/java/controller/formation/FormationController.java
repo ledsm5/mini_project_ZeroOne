@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,6 +14,7 @@ import Model.SquadDTO;
 import command.FormationCommand;
 import service.formation.AddPlayerSquad;
 import service.formation.FmPlayerDetailService;
+import service.formation.ForPlayerDetailService;
 import service.formation.FormationDelService;
 import service.formation.FormationDetailService;
 import service.formation.FormationListService;
@@ -43,14 +45,27 @@ public class FormationController {
 	FormationDelService formationDelService;
 	@Autowired
 	FormationDetailService formationDetailService;
+	@Autowired
+	ForPlayerDetailService forPlayerDetailService;
+	
+	
+	
+	
+	@RequestMapping("ajaxTest1")
+	public String ajaxTest1(@ModelAttribute(value="n")String n,HttpSession session, Model model ) {
+		squadListService.squadList(session,model);
+		formationListService.forList(session,model);
+		return "formation/ajaxTest";
+	}
+
 	
 	
 	
 	@RequestMapping("forDetail")
 	public String forDetail(String plerName , HttpSession session, Model model) {
-		
+		forPlayerDetailService.forPlerDt(plerName,session ,model);
+		squadListService.squadList(session,model);
 		formationListService.forList(session,model);
-		squadListService.squadList(session,model);	
 		return "formation/formationHome";
 	}
 	

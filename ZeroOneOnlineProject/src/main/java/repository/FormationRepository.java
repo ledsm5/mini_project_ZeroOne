@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import Model.FormationDTO;
+import Model.FormationPlayerDTO;
 import Model.PlayerDTO;
 import Model.SquadDTO;
 
@@ -16,6 +17,12 @@ public class FormationRepository {
 	String namespace = "mappers.formationMapper";
 	String statement;
 
+	
+	
+	public PlayerDTO forPlDetail(String plerName) {
+		statement = namespace + ".forPlDetail";
+		return sqlSession.selectOne(statement,plerName);
+	}
 	
 	public FormationDTO forDetail(FormationDTO dto) {
 		statement = namespace + ".forDetail";

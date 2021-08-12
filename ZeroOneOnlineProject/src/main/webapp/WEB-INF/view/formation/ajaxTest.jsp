@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="../include/includeTags.jsp" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,45 +135,22 @@
 		height:400px;
 	}
 </style>
-<script type="text/javascript">
-	
-</script>
 </head>
 <body>
-	<div id="wrap">
-		<div id="top"> 
-			<div id="search_bar">
-				<form action="searchedPl">
-					<input type="search" name="plerName" value="${err2 }">
-					<input type="submit" value="검색">
-				
-				</form>
-				
-				<form action="addPlayer">
-					${dto.plerName } ${err } ${alreadyErr }
-					<input type="submit" value="내 팀에 틍록">
-					<input type="hidden" name="plerName" value="${dto.plerName }">
-					<input type="hidden" name="plerPosition" value="${dto.plerPosition }">
-					<input type="hidden" name="plerAbility" value="${dto.plerAbility }">
-					<input type="hidden" name="plerSalary" value="${dto.plerSalary }">
-					<input type="hidden" name="plerPrice" value="${dto.plerPrice }">
-				</form>
-			</div>
-			
-			
+	
 
 
+<!-- 동기식   -->
+<c:if test="${n == 1 }">
 
-			
-			<!-- 포메이션  -->
-			<div id="notice_content">
-			<div id="team_fm">
-				포메이션      <button >A</button>   <button onclick="testDiv(1)">B</button> <button class="btnC">C</button>
+ 			<div id="team_fm">
+ 			
+				포메이션      <button >A</button>   <button >B</button> <button >C</button>
 				<div class="buttonSelector">
 					<c:forEach items="${listFor }" var="name">
 					<table>		
 						<tr>
-							<td class="btnMaker">			<%-- javascript:location.href='forDetail?positionNum=${name.positionNum }' --%>										
+							<td class="btnMaker">												
 								<input type="image"  src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" ><br>
 														
 									<button onclick="ViewSearch(['${name.plerName }','${name.positionNum }'])" >선수정보</button>							
@@ -221,67 +197,14 @@
 				</div>
 				
 			</div>
-		</div> 
-	</div>	
+		
+				
+</c:if>
 
-
-			<!-- 선수단  -->
-			<div id="squad_list">
-				<div class="list_tb">
-					<h2>선수단</h2>
-					<form:form action="formationRegist" name="frmJoin" method="get" modelAttribute="formationCommand">	
-						<input type="hidden" name="plerName" >
-						<input type="hidden" name="plerPosition" >
-						<input type="hidden" name="plerAbility" >
-						<input type="hidden" name="plerSalary" >
-						<input type="hidden" name="positionNum" >	
-						
-					</form:form>
-					<table border="1">					
-							<tr><td>선수이름</td><td>포지션</td><td>스탯</td><td>주급</td><td></td><td></td></tr>
-							<c:forEach items="${list }" var="list" varStatus="cnt">
-								<tr>
-									<td>${list.plerName }</td>
-									<td>${list.plerPosition }</td>
-									<td>${list.plerAbility }</td>
-									<td>${list.plerSalary }</td>
-									<td><a href="squadDel?plerName=${list.plerName }">방출하기</a></td>
-									<td><input type="button" value="등록" onclick="aaa(['${list.plerName }','${list.plerPosition }','${list.plerAbility }','${list.plerSalary }'])"></td>
-								</tr>
-							</c:forEach>		
-						<%-- <c:if test="${list.memId == null }">
-							선수단이 없습니다 
-						</c:if> --%>
-					</table>	
-				</div>				
-			</div>
-	</div>
-
-
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
 <script type="text/javascript">
-/* ajax */
 
 
-function testDiv(num){
-	
-	$.ajax({ // 비동기식
-		type : "post",
-		url : "ajaxTest1",
-		dataType : "html",
-		data : "n="+num,
-		success : function(result){ //익명함수 
-			$("#notice_content").html(result);
-		},
-		error: function(){
-			alert('에러가 나왔다 홀홀홀~');
-			return;
-		}
-	});
-}	
-	
-	
+
 /* JS */	
 	const DTpositionNum1 = document.getElementById("positionNum1DT");
 	const DTpositionNum2 = document.getElementById("positionNum2DT");
@@ -426,6 +349,5 @@ function regist() {
  */
  
 </script>
-
 </body>
 </html>

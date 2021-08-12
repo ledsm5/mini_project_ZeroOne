@@ -24,6 +24,7 @@ public class FormationRegistService {
 		dto.setPlerPosition(formationCommand.getPlerPosition());
 		dto.setPlerSalary(formationCommand.getPlerSalary());
 		dto.setPositionNum(formationCommand.getPositionNum());
+		/* dto.setForABC(formationCommand.getForABC()); */
 		formationRepository.forRegist(dto);
 	}
 	

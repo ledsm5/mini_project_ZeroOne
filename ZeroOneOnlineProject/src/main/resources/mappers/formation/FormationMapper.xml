@@ -16,6 +16,13 @@
 
 
 
+<select id="forPlDetail" parameterType="string" resultType="Model.PlayerDTO">
+	select <include refid="BaseColumn"></include> 
+	from player 
+	where pler_name = #{plerName}
+</select>
+
+
 <select id="forDetail" parameterType="Model.FormationDTO" resultType="Model.FormationDTO">
 	select  pler_name plerName
 	from formation
@@ -60,6 +67,7 @@
 	values(#{memId},#{plerName},#{plerSalary},#{plerPosition},#{plerAbility},#{positionNum},
 		((select pler_price from player where pler_name = #{plerName})),
 		((select pler_image from player where pler_name = #{plerName} ))
+		
 	
 	)
 </insert>
@@ -97,7 +105,7 @@
 
 <select id="searchDetail" parameterType="string" resultType="Model.PlayerDTO">
 	select <include refid="BaseColumn"></include> from player
-	where pler_name = #{plerName}
+	where pler_name LIKE '%' || #{plerName} || '%' 
 </select>
 
 

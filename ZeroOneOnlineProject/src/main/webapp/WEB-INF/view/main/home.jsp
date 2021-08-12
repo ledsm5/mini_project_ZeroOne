@@ -23,8 +23,6 @@
 	
 }
 
-
-
 .content{
 	height: 800px;
 	background: url("images/messi.jpeg");
