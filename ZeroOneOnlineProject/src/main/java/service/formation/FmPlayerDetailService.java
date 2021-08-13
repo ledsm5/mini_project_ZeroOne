@@ -10,7 +10,7 @@ import repository.FormationRepository;
 public class FmPlayerDetailService {
 	@Autowired
 	FormationRepository formationRepository;
-	public void searchDetail(String plerName, Model model) {
+	public void searchDetail(String plerName,Model model) {
 		PlayerDTO dto = formationRepository.searchDetail(plerName);
 		model.addAttribute("dto",dto);
 		

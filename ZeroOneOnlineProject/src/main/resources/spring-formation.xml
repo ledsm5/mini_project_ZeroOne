@@ -20,6 +20,7 @@
 	<bean class="service.formation.FormationDelService"></bean>
 	<bean class="service.formation.FormationDetailService"></bean>
 	<bean class="service.formation.ForPlayerDetailService"></bean>
+	
 
 	
 	<bean class="controller.ajax.AjaxController"></bean>

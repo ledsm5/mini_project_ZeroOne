@@ -3,21 +3,11 @@ package Model;
 public class FormationDTO {
 	String memId;
 	String plerName;
-	String plerSalary;
-	String plerPrice;
-	String plerPosition;
-	String plerAbility;
 	String positionNum;
 	String plerImage;
-	String forABC;
 	
 	
-	public String getForABC() {
-		return forABC;
-	}
-	public void setForABC(String forABC) {
-		this.forABC = forABC;
-	}
+	
 	public String getPlerImage() {
 		return plerImage;
 	}
@@ -35,30 +25,6 @@ public class FormationDTO {
 	}
 	public void setPlerName(String plerName) {
 		this.plerName = plerName;
-	}
-	public String getPlerSalary() {
-		return plerSalary;
-	}
-	public void setPlerSalary(String plerSalary) {
-		this.plerSalary = plerSalary;
-	}
-	public String getPlerPrice() {
-		return plerPrice;
-	}
-	public void setPlerPrice(String plerPrice) {
-		this.plerPrice = plerPrice;
-	}
-	public String getPlerPosition() {
-		return plerPosition;
-	}
-	public void setPlerPosition(String plerPosition) {
-		this.plerPosition = plerPosition;
-	}
-	public String getPlerAbility() {
-		return plerAbility;
-	}
-	public void setPlerAbility(String plerAbility) {
-		this.plerAbility = plerAbility;
 	}
 	public String getPositionNum() {
 		return positionNum;

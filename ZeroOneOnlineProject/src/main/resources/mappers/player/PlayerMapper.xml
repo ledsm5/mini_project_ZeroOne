@@ -15,7 +15,7 @@
 
 <select id="plerDetail" parameterType="string" resultType="Model.PlayerDTO">
 	select <include refid="BaseColumn"></include> from player
-	where pler_num = #{plerNum}
+	where pler_Name = #{plerName}
 </select>
 
 <delete id="plDel" parameterType="string">

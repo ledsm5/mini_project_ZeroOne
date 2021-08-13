@@ -169,15 +169,17 @@
 			<!-- 포메이션  -->
 			<div id="notice_content">
 			<div id="team_fm">
-				포메이션      <button >A</button>   <button onclick="testDiv(1)">B</button> <button class="btnC">C</button>
+				포메이션     
 				<div class="buttonSelector">
+				
+				<!--상세정보   -->
 					<c:forEach items="${listFor }" var="name">
 					<table>		
 						<tr>
-							<td class="btnMaker">			<%-- javascript:location.href='forDetail?positionNum=${name.positionNum }' --%>										
-								<input type="image"  src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" ><br>
+							<td class="btnMaker">													
+								<input type="image" alt="왜없내" src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" ><br>
 														
-									<button onclick="ViewSearch(['${name.plerName }','${name.positionNum }'])" >선수정보</button>							
+									<button onclick="playerView('${name.plerName}')" >선수정보</button>							
 									<button onclick="sel('${name.positionNum }')">방출</button>
 															
 							</td>
@@ -186,32 +188,6 @@
 							</td>
 						<tr>	
 					</table>
-					<!-- 선수 상세 정보   -->
-					<div id="${name.positionNum }DT" style="position:absolute;z-index:999;display:none;
-							background: none rgba(0, 0, 0, 0.9); filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#80000000', endColorstr='#80000000');" align='center'>
-							<font size='3'  onclick="CloseSearch('${name.positionNum }')">x</font>
-						<table valign="middle" height=100% >
-								<br>선수명    ${dtoP.plerName }<br>								
-								<div class="tb_ul1">
-									<ul>										
-										<li>능력치&nbsp;${dtoP.plerAbility }	</li>
-										<li>포지션 &nbsp;${dtoP.plerPosition }</li>
-										<li>시세 &nbsp;${dtoP.plerPrice }</li>
-										<li>급여 &nbsp;${dtoP.plerSalary }</li>
-										<li>키&nbsp;${dtoP.plerHeight }</li>										
-									</ul>
-								</div>	
-								<div class="tb_ul2">
-									<ul>
-										<li>시즌&nbsp;${dtoP.plerSession }</li>
-										<li>소속리그 &nbsp;${dtoP.plerLeague }	</li>
-										<li>소속팀&nbsp;${dtoP.plerTeam }</li>
-										<li>개인기 &nbsp;${dtoP.plerIndiSkill }</li>
-										<li>주발 &nbsp;${dtoP.plerFoot }</li>										
-									</ul>
-								</div>								
-						</table>
-					</div>		
 					</c:forEach>
 							
 							<c:forEach var="i" begin="1" end="11">				
@@ -231,9 +207,6 @@
 					<h2>선수단</h2>
 					<form:form action="formationRegist" name="frmJoin" method="get" modelAttribute="formationCommand">	
 						<input type="hidden" name="plerName" >
-						<input type="hidden" name="plerPosition" >
-						<input type="hidden" name="plerAbility" >
-						<input type="hidden" name="plerSalary" >
 						<input type="hidden" name="positionNum" >	
 						
 					</form:form>
@@ -246,7 +219,7 @@
 									<td>${list.plerAbility }</td>
 									<td>${list.plerSalary }</td>
 									<td><a href="squadDel?plerName=${list.plerName }">방출하기</a></td>
-									<td><input type="button" value="등록" onclick="aaa(['${list.plerName }','${list.plerPosition }','${list.plerAbility }','${list.plerSalary }'])"></td>
+									<td><input type="button" value="등록" onclick="aaa('${list.plerName }')"></td>
 								</tr>
 							</c:forEach>		
 						<%-- <c:if test="${list.memId == null }">
@@ -261,28 +234,16 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
 <script type="text/javascript">
-/* ajax */
 
-
-function testDiv(num){
-	
-	$.ajax({ // 비동기식
-		type : "post",
-		url : "ajaxTest1",
-		dataType : "html",
-		data : "n="+num,
-		success : function(result){ //익명함수 
-			$("#notice_content").html(result);
-		},
-		error: function(){
-			alert('에러가 나왔다 홀홀홀~');
-			return;
-		}
-	});
-}	
-	
-	
 /* JS */	
+ 
+ 
+ function playerView(name) {
+	location.href = 'plerDetailView?plerName=' +name;
+}
+ 
+ 
+
 	const DTpositionNum1 = document.getElementById("positionNum1DT");
 	const DTpositionNum2 = document.getElementById("positionNum2DT");
 	const DTpositionNum3 = document.getElementById("positionNum3DT");
@@ -371,11 +332,7 @@ const selector11 = document.getElementById(fmId11);
 
 	//hidden에 값넣고 전송 
 	function aaa(event) {
-		frmJoin.plerName.value = event[0];
-		frmJoin.plerPosition.value = event[1];
-		frmJoin.plerAbility.value = event[2];
-		frmJoin.plerSalary.value = event[3];
-	
+		frmJoin.plerName.value = event;
 		frmJoin.submit();	
 		
 	}

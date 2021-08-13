@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +21,7 @@ import service.formation.FormationRegistService;
 import service.formation.SquadDelService;
 import service.formation.SquadDetailService;
 import service.formation.SquadListService;
+import service.player.PlayerDetailService;
 
 
 @Controller
@@ -47,23 +47,20 @@ public class FormationController {
 	FormationDetailService formationDetailService;
 	@Autowired
 	ForPlayerDetailService forPlayerDetailService;
+	@Autowired
+	PlayerDetailService playerDetailService;
 	
 	
-	
-	
-	@RequestMapping("ajaxTest1")
-	public String ajaxTest1(@ModelAttribute(value="n")String n,HttpSession session, Model model ) {
-		squadListService.squadList(session,model);
-		formationListService.forList(session,model);
-		return "formation/ajaxTest";
+	@RequestMapping("plerDetailView")
+	public String plerDetailView(@RequestParam(value="plerName")String plerName,Model model) {
+		playerDetailService.DetailPrint(plerName,model);
+		return "formation/playerDetail";
 	}
-
-	
 	
 	
 	@RequestMapping("forDetail")
 	public String forDetail(String plerName , HttpSession session, Model model) {
-		forPlayerDetailService.forPlerDt(plerName,session ,model);
+		/* forPlayerDetailService.forPlerDt(plerName,session ,model); */
 		squadListService.squadList(session,model);
 		formationListService.forList(session,model);
 		return "formation/formationHome";
@@ -77,7 +74,7 @@ public class FormationController {
 	
 	//ajax 로 포메이션 여러개 불러오기 
 	@RequestMapping("formationRegist")//드래그 해서 놓으면 해당 자리의 update 문으로  TEAM_Location_num을 지정해준다 
-	public String formationRegist(FormationCommand formationCommand,  HttpSession session, Model model) {		
+	public String formationRegist(FormationCommand formationCommand,HttpSession session, Model model) {		
 		squadListService.squadList(session,model);		
 		formationRegistService.formationRegist(formationCommand,session);
 		squadDelService.delAction(formationCommand);
@@ -91,9 +88,6 @@ public class FormationController {
 		squadDetailService.sqdDetail(plerName);
 		return "formation/playerDetail";
 	}
-	
-	
-	
 	
 	@RequestMapping("squadDel")
 	public String squadDel(FormationCommand formationCommand) {
@@ -117,10 +111,10 @@ public class FormationController {
 		}//순서 바뀌면 에러
 		
 		SquadDTO dto1 = squadDetailService.sqdDetail(plerName);
-		FormationDTO dto2 = formationDetailService.forDetail(plerPosition, session); 
+		FormationDTO dto2 = formationDetailService.forDetail(session,plerName); 
 	
 		if(dto2 != null) {
-			model.addAttribute("alreadyErr","이미 구매한 선수입니다");
+			model.addAttribute("alreadyErr","이미 선수가 있습니다 ");
 			squadListService.squadList(session,model);
 			formationListService.forList(session,model);
 			return "formation/formationHome";
@@ -128,6 +122,7 @@ public class FormationController {
 		
 		if (dto1 == null) {
 			addPlayerSquad.addPlSquad(plerName,plerSalary,plerPrice,plerPosition,plerAbility,session);
+			squadListService.squadList(session,model);
 			formationListService.forList(session,model);
 			return "redirect:formation";
 		} else {
@@ -153,8 +148,6 @@ public class FormationController {
 	public String formation(FormationCommand formationCommand , HttpSession session,Model model) {
 		squadListService.squadList(session,model); 
 		formationListService.forList(session,model);
-		
-		
 		return "formation/formationHome";
 	}
 	

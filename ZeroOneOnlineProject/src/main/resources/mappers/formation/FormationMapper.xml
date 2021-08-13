@@ -26,7 +26,7 @@
 <select id="forDetail" parameterType="Model.FormationDTO" resultType="Model.FormationDTO">
 	select  pler_name plerName
 	from formation
-	where mem_id = #{memId} and pler_position = #{plerPosition}
+	where mem_id = #{memId} and pler_name = #{plerName}
 </select>
 
 
@@ -37,8 +37,7 @@
 
 
 <select id="forList" parameterType="string" resultType="Model.FormationDTO">
-	select mem_id memId, pler_name plerName, pler_salary plerSalary,pler_price plerPrice,pler_position plerPosition,
-		pler_ability plerAbility,pler_image plerImage ,POSITION_NUM positionNum 
+	select mem_id memId, pler_name plerName ,POSITION_NUM positionNum ,pler_image plerImage
 	from formation
 	where mem_id = #{memId}
 </select>
@@ -63,12 +62,10 @@
 
 <insert id="forRegist" parameterType="Model.FormationDTO">
 	insert into formation
-		(mem_id, pler_name, pler_salary,pler_position,pler_ability , POSITION_NUM,pler_price,pler_image)
-	values(#{memId},#{plerName},#{plerSalary},#{plerPosition},#{plerAbility},#{positionNum},
-		((select pler_price from player where pler_name = #{plerName})),
-		((select pler_image from player where pler_name = #{plerName} ))
-		
+		(mem_id, pler_name, POSITION_NUM,pler_image)
+	values(#{memId},#{plerName},#{positionNum},
 	
+	((select pler_image from player where pler_name = #{plerName} ))
 	)
 </insert>
 

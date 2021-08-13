@@ -12,13 +12,15 @@ import repository.FormationRepository;
 public class FormationDetailService {
 	@Autowired
 	FormationRepository formationRepository;
-	public FormationDTO forDetail(String plerPosition ,HttpSession session) {
+	public FormationDTO forDetail(HttpSession session,String plerName) {
 		
 		FormationDTO dto = new FormationDTO();
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo"); 
 		String memId = authInfo.getUserId();
 		dto.setMemId(memId);
-		dto.setPlerPosition(plerPosition);
+		dto.setPlerName(plerName);
+		
+		
 		FormationDTO dto2 = formationRepository.forDetail(dto);
 		
 		

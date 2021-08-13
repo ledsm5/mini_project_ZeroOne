@@ -19,12 +19,9 @@ public class FormationRegistService {
 		String memId = authInfo.getUserId();
 		FormationDTO dto = new FormationDTO();
 		dto.setMemId(memId);
-		dto.setPlerAbility(formationCommand.getPlerAbility());
 		dto.setPlerName(formationCommand.getPlerName());
-		dto.setPlerPosition(formationCommand.getPlerPosition());
-		dto.setPlerSalary(formationCommand.getPlerSalary());
 		dto.setPositionNum(formationCommand.getPositionNum());
-		/* dto.setForABC(formationCommand.getForABC()); */
+
 		formationRepository.forRegist(dto);
 	}
 	

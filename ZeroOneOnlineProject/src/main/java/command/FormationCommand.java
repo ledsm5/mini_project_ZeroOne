@@ -8,16 +8,10 @@ public class FormationCommand {
 	String plerPosition;
 	String plerAbility;
 	String positionNum;
-	String forABC;
 	
 	
 	
-	public String getForABC() {
-		return forABC;
-	}
-	public void setForABC(String forABC) {
-		this.forABC = forABC;
-	}
+	
 	public String getMemId() {
 		return memId;
 	}

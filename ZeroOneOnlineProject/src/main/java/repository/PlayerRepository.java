@@ -14,9 +14,9 @@ public class PlayerRepository {
 	String namespace = "mappers.playerMapper";
 	String statement;
 	
-	public PlayerDTO plerDetail(String plerNum) {
+	public PlayerDTO plerDetail(String plerName) {
 		statement = namespace + ".plerDetail";
-		return sqlSession.selectOne(statement,plerNum);
+		return sqlSession.selectOne(statement,plerName);
 		
 	}
 	

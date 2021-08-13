@@ -52,13 +52,13 @@ public class PlayerController {
 	@RequestMapping("plModAction")
 	public String plModAction(PlayerCommand playerCommand,HttpSession session) {
 		playerModifyService.modAction(playerCommand,session);
-		return null;
+		return "player/playerHome";
 	}
 	
 	
 	@RequestMapping("plerModDetail")
-	public String plerModDetail(@RequestParam(value="plerNum")String plerNum,Model model) {
-		playerDetailService.DetailPrint(plerNum,model);
+	public String plerModDetail(@RequestParam(value="plerName")String plerName,Model model) {
+		playerDetailService.DetailPrint(plerName,model);
 		return "player/plModifyForm";
 	}
 	
