@@ -31,7 +31,7 @@
     	
 	}
 	#team_fm{
-		height: 900px;
+		height: 1300px;
    	 	background-image:url("../images/stra6_fifa.jpg");
    	 	background-repeat:no-repeat;
    	 	background-size:cover;
@@ -41,13 +41,11 @@
 	#squad_list{
 		width: 30%;
   	  	float: right;
-   	 	height: 1000px;
+   	 	height: 1400px;
     	background-color: #2B1640;
     	opacity:0.8;
     	border-left: 3px solid black;
     	box-sizing: border-box;
-    
-
 	}
 	#squad_list > a {
 		color:white;
@@ -61,80 +59,120 @@
 	.list_tb {
 		margin-top: 30px;
 		margin-left: 20px;
-	}
-	
-	
-	
-	.list_tb { 
 		color:	#f5fffa;
 	}
 	
-	#positionNum1DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum2DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum3DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum4DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum5DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum6DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum7DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum8DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum9DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum10DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
-	#positionNum11DT {
-		color: white;
-		background: white;
-		width:400px;
-		height:400px;
-	}
+	/* input[type="button" i] {
+		color : red;
+	} */
+	
+	.btnMaker{position:relative;}
+	.btnMaker>div{width:170px;}
+	.card_back{position:relative; z-index:1;}/*카드백그라운드*/
+	.card_back>img{width:100%;}
+	.btnMaker>div>p{position:absolute; top:64px; left:18px;z-index:2;}/*손흥민*/
+	/*카드버튼*/
+	.card_Btn{position:absolute; bottom:37px; left:40px; z-index:3;}
+	
+	.positionNum1 {position:absolute;bottom:400px;left:200px;}
+	.positionNum2 {position:absolute;bottom:400px;left:500px;}
+	.positionNum3 {position:absolute;bottom:400px;left:800px;}
+	.positionNum4 {position:absolute;bottom:150px;left:200px;}
+	.positionNum5 {position:absolute;bottom:150px;left:500px;}
+	.positionNum6 {position:absolute;bottom:150px;left:800px;}
+	.positionNum7 {position:absolute;bottom:-100px;left:200px;}
+	.positionNum8 {position:absolute;bottom:-100px;left:400px;}
+	.positionNum9 {position:absolute;bottom:-100px;left:600px;}
+	.positionNum10 {position:absolute;bottom:-100px;left:800px;}
+	.positionNum11 {position:absolute;bottom:-200px;left:500px;}
+	
+	#positionNum1Maker {position:absolute;bottom:350px;left:200px;}
+	#positionNum2Maker {position:absolute;bottom:350px;left:500px;}
+	#positionNum3Maker {position:absolute;bottom:350px;left:800px;}
+	#positionNum4Maker {position:absolute;bottom:50px;left:200px;}
+	#positionNum5Maker {position:absolute;bottom:50px;left:500px;}
+	#positionNum6Maker {position:absolute;bottom:50px;left:800px;}
+	#positionNum7Maker {position:absolute;bottom:-100px;left:200px;}
+	#positionNum8Maker {position:absolute;bottom:-100px;left:400px;}
+	#positionNum9Maker {position:absolute;bottom:-100px;left:600px;}
+	#positionNum10Maker {position:absolute;bottom:-100px;left:800px;}
+	#positionNum11Maker {position:absolute;bottom:-200px;left:500px;}
+	
+	
+
+/* add default color for animation start  */
+
+
+/* toggle this class */
+
+.color-bg-start {
+  background-color: salmon;
+}
+
+
+/* toggle class bg-animate-color */
+
+.bg-animate-color {
+  animation: random-bg .5s linear infinite;
+}
+
+
+/* add animation to bg color  */
+
+@keyframes random-bg {
+  from {
+    filter: hue-rotate(0);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+#fun-btn {
+  /* change bg color to get different hues    */
+  background-color: salmon;
+  color: white;
+  padding: 2em 3em;
+  border: none;
+  transition: all .3s ease;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  outline: none;
+  align-self: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#fun-btn:hover {
+  animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
+}
+
+.start-fun {
+  background-color: #fff !important;
+  /* change color of button text when fun is started   */
+  color: salmon !important;
+}
+
+/* pulsating effect on button */
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+	
 </style>
 <script type="text/javascript">
 	
@@ -160,28 +198,29 @@
 					<input type="hidden" name="plerPrice" value="${dto.plerPrice }">
 				</form>
 			</div>
-			
-			
 
 
-
-			
 			<!-- 포메이션  -->
 			<div id="notice_content">
 			<div id="team_fm">
 				포메이션     
-				<div class="buttonSelector">
-				
-				<!--상세정보   -->
+				<div class="buttonSelector">			
 					<c:forEach items="${listFor }" var="name">
 					<table>		
 						<tr>
-							<td class="btnMaker">													
-								<input type="image" alt="왜없내" src="../player/upload/${name.plerImage.split(',')[0] }" style="width: 200px; height: 200px;" class="${name.positionNum }img" ><br>
-														
-									<button onclick="playerView('${name.plerName}')" >선수정보</button>							
-									<button onclick="sel('${name.positionNum }')">방출</button>
-															
+							<td class="btnMaker" id="${name.positionNum }Maker">
+								<div>
+									<div class="card_back">
+										<img src="../images/21TOTN.png">												
+									</div>
+									<p><input type="image" alt="왜없내" src="../player/upload/${name.plerImage.split(',')[0] }" class="${name.positionNum }img" ></p>
+									<div class="card_Btn">
+										<button onclick="playerView('${name.plerName}')" class="${name.plerName}">선수정보</button>							
+										<button onclick="sel('${name.positionNum }')">방출</button>
+									</div>
+								</div>
+								<!-- 선수 상세 -->
+								<div id="pler_view"></div>															
 							</td>
 							<td>		
 								<input type="hidden" value="${name.positionNum }" class="${name.positionNum }">
@@ -189,13 +228,12 @@
 						<tr>	
 					</table>
 					</c:forEach>
-							
+						<div class="button_for_i">
 							<c:forEach var="i" begin="1" end="11">				
-								<input type="button" class="positionNum${i }" id="positionNum${i }" name="positionNum${i }" value="선수${i }" onclick="run(${i })"><br>
+								<input type="button" class="positionNum${i }" id="fun-btn" name="positionNum${i }" value="선수${i }" onclick="run(${i })"><br>
 							</c:forEach>
-								
+						</div>		
 				</div>
-				
 			</div>
 		</div> 
 	</div>	
@@ -211,7 +249,7 @@
 						
 					</form:form>
 					<table border="1">					
-							<tr><td>선수이름</td><td>포지션</td><td>스탯</td><td>주급</td><td></td><td></td></tr>
+							<tr><td>선수이름</td><td>포지션</td><td>스탯</td><td>주급</td><td>방출</td><td>등록</td></tr>
 							<c:forEach items="${list }" var="list" varStatus="cnt">
 								<tr>
 									<td>${list.plerName }</td>
@@ -234,37 +272,27 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
 <script type="text/javascript">
+/* AJAX */
+function playerView(name) {
+	/* location.href = 'plerDetailView?plerName=' +name; */
+	$.ajax({
+		type : "post",
+		url : "plerDetailView",
+		data : "html",
+		data : "plerName=" + name,
+		success : function(result) {
+			$("#pler_view").html(result);
+		},
+		error: function() {
+			alert("에러!");
+			return;
+		}
+	});
+}
 
 /* JS */	
  
  
- function playerView(name) {
-	location.href = 'plerDetailView?plerName=' +name;
-}
- 
- 
-
-	const DTpositionNum1 = document.getElementById("positionNum1DT");
-	const DTpositionNum2 = document.getElementById("positionNum2DT");
-	const DTpositionNum3 = document.getElementById("positionNum3DT");
-	const DTpositionNum4 = document.getElementById("positionNum4DT");
-	const DTpositionNum5 = document.getElementById("positionNum5DT");
-	const DTpositionNum6 = document.getElementById("positionNum6DT");
-	const DTpositionNum7 = document.getElementById("positionNum7DT");
-	const DTpositionNum8 = document.getElementById("positionNum8DT");
-	const DTpositionNum9 = document.getElementById("positionNum9DT");
-	const DTpositionNum10 = document.getElementById("positionNum10DT");
-	const DTpositionNum11 = document.getElementById("positionNum11DT");
-    
-    function ViewSearch(event){
-    	eval('DT'+event[1]).style.display='inline';
-        location.href = 'forDetail?plerName='+ event[0];
-       	ViewSearch(event);
-    }
-	function CloseSearch(event){
-		eval('DT'+event).style.display='none'
-    }
-
 	
 /* 
 	function pop() {
@@ -381,7 +409,19 @@ function regist() {
     });
 } 
  */
- 
+ $('#fun-btn').on('click', function(event) {
+	  $(this).toggleClass('start-fun');
+	  var $page = $('.page');
+	  $page.toggleClass('color-bg-start')
+	    .toggleClass('bg-animate-color');
+
+	  //change text when when button is clicked
+
+	  $(this).hasClass('start-fun') ?
+	    $(this).text('stop the fun') :
+	    $(this).text('start the fun');
+
+	});
 </script>
 
 </body>
